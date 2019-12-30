@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+/* nav */
+nav{
+    /* 2depth메뉴가 펼쳐졌을 때 nav영역을 벗어나면 스크롤 자동 발생 */
+    overflow-y: auto;
+    position: fixed;
+    top:70px; 
+    left:-250px;
+    bottom:0;
+    width:250px;
+    background: #2c2c29;
+    transition: left 0.5s;
+}
+[for="btn-menu"]{
+    position: absolute;
+    top:20px;
+    left:20px;
+    width: 25px;
+    height: 25px;
+}
+[for="btn-menu"] span{
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background: #fff;
+    transform-origin: 2px 1px;
+    transition: 0.5s;
+}
+[for="btn-menu"] span:nth-child(1){top:4px;}
+[for="btn-menu"] span:nth-child(2){top:50%; transform: translateY(-50%);}
+[for="btn-menu"] span:nth-child(3){bottom:4px;}
+
+#btn-menu:checked+label span:nth-child(1){transform: rotate(45deg);}
+#btn-menu:checked+label span:nth-child(2){opacity: 0;}
+#btn-menu:checked+label span:nth-child(3){transform: rotate(-45deg);}
+
+#btn-menu:checked ~ nav{
+    left:0;
+}
+#btn-menu:checked ~ nav::before{
+    content: '';
+    
+}
+
+/* footer ===================================================== */
+/* 배너 */
+.banner{
+    position: relative;
+    height: 70px;
+}
+.banner .wrap{
+    width: 378px;
+    margin: auto;
+    overflow: hidden;
+}
+.banner .wrap ul{
+    width: 1512px;
+    animation: banner 10s linear infinite;
+}
+.banner .wrap ul li{
+    float: left;
+    /* 그리드시스템에서 100%로 잡히므로 초기화시킨다. */
+    width: auto;
+}
+.banner .wrap ul li img{
+    display: block;
+}
+#btn-banner{
+    display: none;
+}
+
+.banner .wrap label{
+    position: absolute;
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.banner .wrap label::before{content: '\f04c';}
+#btn-banner:checked+label::before{content: '\f04b';}
+
+#btn-banner:checked~ul{animation-play-state: paused;}
+
+@keyframes banner {
+    0%{margin-left:0;}
+    100%{margin-left:-1134px;}
+}
